@@ -6,7 +6,7 @@
  * ---------------
  * The visual A/B harness (scripts/ab-visual.js) can only see a change in an output file if
  * that file is served at all. That bound has been measured twice by hand and has gone stale
- * twice (74/77 → 75/77 → the tree is now 85 files), and the one ad-hoc recount was RETRACTED
+ * twice (74/77 → 75/77 → the tree is now 86 files), and the one ad-hoc recount was RETRACTED
  * as a measurement artifact (S28: a tail-slice containment probe reported four obviously
  * styled files as unreached). This script makes the number reproducible instead.
  *
@@ -58,7 +58,7 @@ function marker(i) {
 	return `zzcov-${String(i + 1).padStart(4, '0')}`;
 }
 
-/** All 85 files end with `}` and have balanced <c:if> (verified), so appending a rule lands
+/** All 86 files end with `}` and have balanced <c:if> (verified), so appending a rule lands
  *  outside every DSP block and every CSS rule. Assert both rather than trusting it. */
 function snapshot() {
 	if (!fs.existsSync(THEME_DIR)) die(`no theme output at ${THEME_DIR} — run \`npm run build:css\` first`);
@@ -186,7 +186,7 @@ async function main(argv) {
 
 	inject(files, holdout);
 	// startApp()/guardProbe() report failures through die() → process.exit(), which skips the
-	// finally below. Without this hook a failed run would leave 85 injected files on disk.
+	// finally below. Without this hook a failed run would leave 86 injected files on disk.
 	process.on('exit', () => restore(files));
 
 	let harvests;

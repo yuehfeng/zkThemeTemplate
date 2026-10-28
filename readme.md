@@ -78,7 +78,7 @@ first two is authored in the sources.** They are put in by `scripts/build-css.js
 ```mermaid
 flowchart TD
     subgraph SRC["src/main/resources/web/ — plain CSS, no DSP tags, no taglib header"]
-        ENTRY["85 entry stylesheets<br/>x.css"]
+        ENTRY["86 entry stylesheets<br/>x.css"]
         PART["7 _partial.css<br/>@import'ed, never emitted on their own"]
         MARK["build-safe placeholders<br/>.ZKBD / ZKBD-OFF / ZKDENSITY / ZK-TAGLIB-HEADER<br/>ordinary CSS that stands in for DSP<br/>(only norm.css and tablet.css carry them)"]
         ASSET["assets: img, font, *.js"]
@@ -94,7 +94,7 @@ flowchart TD
     end
 
     COPY["maven resource copy<br/>excludes **/*.css — sources never ship"]
-    OUT["target/classes/web/iceblue11/**/x.css.dsp<br/>85 files + assets"]
+    OUT["target/classes/web/iceblue11/**/x.css.dsp<br/>86 files + assets"]
     JAR["mvn package -> iceblue11.jar"]
     ZK["ZK at request time: evaluates the DSP<br/>-> plain CSS to the browser"]
 
@@ -249,7 +249,7 @@ In a separate console:
 
 `npm run build:css`
 
-It rebuilds all 85 stylesheets in well under a second, and the preview app picks them up on the
+It rebuilds all 86 stylesheets in well under a second, and the preview app picks them up on the
 next request without a restart (`ThemePreviewApp` sets `org.zkoss.zk.WCS.cache=false`), so a
 hard-reload in the browser is enough.
 

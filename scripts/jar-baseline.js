@@ -39,7 +39,7 @@
  *
  * RESTORE IS SNAPSHOT-BASED, NOT REBUILD-BASED
  * --------------------------------------------
- * `install` snapshots all 85 files first and `restore` copies them back, verifying sha256.
+ * `install` snapshots all 86 files first and `restore` copies them back, verifying sha256.
  * Rebuilding with `npm run build:tree` would also work, but only if the build is bit-
  * reproducible — which is the very thing under test. A snapshot cannot beg that question.
  */

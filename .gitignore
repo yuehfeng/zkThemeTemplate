@@ -21,7 +21,7 @@ test-results/
 #
 # WHY IT IS SAFE TO IGNORE AGAIN: with the conversion finished there are no more verification
 # rounds to keep honest, and the byte-level pin never depended on git in the first place —
-# `doc/baseline-manifest.sha256` (86 sha256 lines, checked by `npm run check:baseline`, and
+# `doc/baseline-manifest.sha256` (87 sha256 lines, checked by `npm run check:baseline`, and
 # verifiable without this repo's scripts via `shasum -a 256 -c`) is what actually pins it.
 # `npm run baseline` rebuilds it with `npx --yes zkless-engine@1.1.13`, so a rebuild does not
 # need the dependency P8 removed.

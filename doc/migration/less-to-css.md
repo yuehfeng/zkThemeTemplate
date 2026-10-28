@@ -29,7 +29,7 @@ files; there are now 0.
 
 | | before | now |
 |---|---|---|
-| theme sources | 153 `.less` | 85 `.css` entry files (+ 6 partials) |
+| theme sources | 153 `.less` | 86 `.css` entry files (+ 7 partials) |
 | build runner | `zkless-engine` (`zklessc`), LESS compiler | `scripts/build-css.js` (Node + CleanCSS level 0) |
 | how you customize | override a `@variable`, rebuild the jar | override a `--zk-*` custom property, no rebuild |
 | how many ways to theme | two (Less variables **and** custom properties) | **one** |

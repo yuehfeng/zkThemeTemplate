@@ -1,0 +1,130 @@
+/* Retune the fan-in stagger with style="--zk-speeddial-transition-delay: 200ms". */
+.z-speeddial {
+	--zk-speeddial-transition-delay: 80ms;
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
+	/* Always visible, so stay below modal windows (they stack from 1800), like Drawer. */
+	z-index: 1000;
+	width: 56px;
+	height: 56px;
+}
+.z-speeddial-trigger {
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	border: 0;
+	background: var(--zk-color-primary);
+	color: var(--zk-text-color-default3);
+	font-size: 22px;
+	cursor: pointer;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.z-speeddial-trigger:focus-visible {
+	outline: 2px solid var(--zk-color-primary);
+	outline-offset: 2px;
+}
+/* Disabled state — applied at the root level by _applyDisabled(). */
+.z-speeddial-disabled > .z-speeddial-trigger {
+	opacity: 0.5;
+	cursor: not-allowed;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.z-speeddial-icon-open,
+.z-speeddial-icon-close {
+	position: absolute;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.z-speeddial-icon-close {
+	opacity: 0;
+	transform: rotate(-45deg);
+}
+.z-speeddial-open > .z-speeddial-trigger > .z-speeddial-icon-open {
+	opacity: 0;
+	transform: rotate(45deg);
+}
+.z-speeddial-open > .z-speeddial-trigger > .z-speeddial-icon-close {
+	opacity: 1;
+	transform: rotate(0);
+}
+/* When there's no closeIconSclass, the open-icon is :only-child and we */
+/* rotate it 45° to look like an × (Material FAB convention). The earlier */
+/* rule above sets opacity:0 (intended for the crossfade case); here we */
+/* MUST restore opacity:1 so the lone icon stays visible after rotation. */
+/* Without this override the FAB appears to vanish when opened. */
+.z-speeddial-open > .z-speeddial-trigger > .z-speeddial-icon-open:only-child {
+	opacity: 1;
+	transform: rotate(45deg);
+}
+.z-speeddial-items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 56px;
+	height: 56px;
+	pointer-events: none;
+}
+.z-speeddial-items > li {
+	position: absolute;
+	left: 4px;
+	top: 4px;
+	opacity: 0;
+	transform: scale(0);
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	/* --zk-speeddial-item-index is set inline per item by _layoutItems(). */
+	transition-delay: calc(var(--zk-speeddial-item-index, 0) * var(--zk-speeddial-transition-delay));
+}
+.z-speeddial-open > .z-speeddial-items {
+	pointer-events: auto;
+}
+.z-speeddial-open > .z-speeddial-items > li {
+	opacity: 1;
+	transform: scale(1);
+}
+.z-speeddialitem {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 1px solid var(--zk-text-color-light);
+	background: var(--zk-base-background-color);
+	color: var(--zk-text-color-default);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.z-speeddialitem-label {
+	display: none;
+}
+.z-speeddialitem-disabled,
+.z-speeddialitem[disabled],
+.z-speeddialitem[aria-disabled="true"] {
+	opacity: 0.5;
+	cursor: default;
+}
+.z-speeddialitem:focus-visible {
+	outline: 2px solid var(--zk-color-primary);
+	outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+	/* The 45-degree rotation is NOT reset here. Zeroing the transition */
+	/* already removes the motion; deleting the transform as well would make */
+	/* the open trigger render pixel-identical to the closed one, costing */
+	/* reduced-motion users the FAB's only open/close affordance in the */
+	/* default (no closeIconSclass) case. */
+	.z-speeddial-icon-open,
+	.z-speeddial-icon-close,
+	.z-speeddial-items > li {
+		transition: none !important;
+		transition-delay: 0ms !important;
+	}
+}

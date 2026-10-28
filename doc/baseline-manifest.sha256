@@ -39,9 +39,20 @@
 # Same caveat as 2026-08-05 applies to those 3: their baseline and the ZK 11 jar are now the
 # same bytes by construction, so `cssdiff jar baseline` reporting 0 proves nothing for them;
 # what it does prove is that no OTHER file drifted.
+# 
+# backfill for ZK-6098 Speeddial (2026-10-28)
+# js/zkex/wgt/css/speeddial.css.dsp is a component that never existed in this theme. Its
+# baseline is ZK's own zklessc output (zkcml 059cd3086, zkex/codegen, LESS 3.13.1), sha256
+#   68cead48270f44d540f7b0d92551a7e49190e5d59bea945a84716c4f3bb8fef2
+# (LESS 4.8.1 compiles the same source to the same bytes), with ONE edit:
+# var(--zk-text-color-inverse) -> var(--zk-text-color-default3). ZK-6105 renamed that
+# token upstream; this theme still declares the old name, with the same #FFFFFF.
+# Same caveat as 2026-08-05: baseline and candidate agree by construction, so cssdiff's 0
+# proves nothing for this file. The real comparison was cssdiff against ZK's unedited output:
+# 73 declarations, the remap above the only difference.
 #
-# files: 86
-13669fb35230996e158a5973a8dbdb57ee5e25e4103d67ff59ff3ec763e1c63c  baseline/.built-from
+# files: 87
+b204740788b98961fffec88603b805cf33308d81b9eceb8d56143d5dfd789205  baseline/.built-from
 1c905b7f0438d19ca2d8c763211e58266783eecb7dfff022298537c1e9bc8b17  baseline/js/zkex/grid/css/grid.css.dsp
 4766e8dcb502071e5361d7dacced8591d8d4b86cc8ba31a58af75872758cf24e  baseline/js/zkex/inp/css/colorbox.css.dsp
 cb17b1c7626655c3cade3190623a13049cbd91c21a958c798026f826cbc37e04  baseline/js/zkex/layout/css/columnlayout.css.dsp
@@ -49,6 +60,7 @@ cb17b1c7626655c3cade3190623a13049cbd91c21a958c798026f826cbc37e04  baseline/js/zk
 e587265cbdd77ec98c872b93a9db21b349bc702b5326d08fadb7596abc139761  baseline/js/zkex/pdfviewer/css/pdfviewer.css.dsp
 60bf65ddd24b777604ae96fde88c17b2cb4b6cfcff140bfa556ce01b89a29de2  baseline/js/zkex/slider/css/rangeslider.css.dsp
 8c4a1c86ad26bcb1d6dded4a10165015bc4e4110d999b958fd6b2d15d28686db  baseline/js/zkex/slider/css/sliderbuttons.css.dsp
+303512076cebd955b76e447c8d09950874ab821509e2415fbd7341b7a6b57a66  baseline/js/zkex/wgt/css/speeddial.css.dsp
 4192fa551fc5550aaa39ab63d2325ddc7780d4f843cb24edb3197a183d1666fa  baseline/js/zkmax/barscanner/css/barcodescanner.css.dsp
 df54c745629840587a65f0effe87b1c89944364bf54d309af36873188d06dc94  baseline/js/zkmax/big/css/biglistbox.css.dsp
 75ad20b0a6814599eaff9adf701eb4f358e1e4d0d79b95d0022c6c67fa6fd65f  baseline/js/zkmax/cropper/css/cropper.css.dsp

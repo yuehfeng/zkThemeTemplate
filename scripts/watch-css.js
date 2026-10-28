@@ -6,7 +6,7 @@
  *   src/main/resources/web/**\/*.css     the theme itself. Any change rebuilds the WHOLE
  *                                       tree, because build-css.js expands @import: a
  *                                       one-line edit to a `_partial.css` can move any
- *                                       number of the 85 outputs, and working out which
+ *                                       number of the 86 outputs, and working out which
  *                                       would be a second, silently-wrong copy of the
  *                                       build's own dependency graph.
  *   src/test/resources/web/**            the preview pages. Maven copies these into
